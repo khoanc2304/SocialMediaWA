@@ -1,0 +1,22 @@
+export const USERS_MESSAGES = {
+  VALIDATION_ERROR: 'User validation failed',
+  LOGIN_SUCCESSFUL: 'Login successful',
+  LOGIN_FAILED: 'Login failed',
+  REGISTER_SUCCESSFUL: 'Register successful',
+  REGISTER_FAILED: 'Register failed',
+  EMAIL_OR_PASSWORD_INCORRECT: 'Email or password is incorrect',
+  NAME_IS_REQUIRED: 'Name is required',
+  NAME_MUST_BE_STRING: 'Name must be a string',
+  NAME_LENGTH_MUST_BE_FROM_1_TO_100_CHARACTERS: 'Name length must be from 1 to 100 characters',
+  EMAIL_IS_REQUIRED: 'Email is required',
+  EMAIL_ALREADY_IN_USE: 'Email is already in use!',
+  EMAIL_IS_INVALID: 'Email is invalid',
+  PASSWORD_IS_REQUIRED: 'Password is required',
+  PASSWORD_MUST_BE_STRING: 'Password must be a string',
+  PASSWORD_LENGTH_MUST_BE_FROM_6_TO_50_CHARACTERS: 'Password length must be from 6 to 50 characters',
+  PASSWORD_NOT_STRONG_ENOUGH:
+    'Password must be at least 6 characters long and include uppercase, lowercase, number, and symbol.',
+  CONFIRM_PASSWORD_IS_REQUIRED: 'Confirm password is required',
+  CONFIRM_PASSWORDS_DOES_NOT_MATCH: 'Confirm password does not match password do not match',
+  DATE_OF_BIRTH_MUST_BE_ISO8601: 'Date of birth must be in ISO 8601 format',
+} as const
