@@ -10,7 +10,6 @@ const usersRouter = Router()
  * Path: /login
  * Method: POST
  */
-
 usersRouter.post('/login', loginValidator, loginController)
 
 /**
@@ -18,7 +17,6 @@ usersRouter.post('/login', loginValidator, loginController)
  * Path: /register
  * Method: POST
  */
-
 usersRouter.post('/register', registerValidator, registerController)
 
 export default usersRouter
