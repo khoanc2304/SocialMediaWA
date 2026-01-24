@@ -111,6 +111,37 @@ class UserService {
       message: USERS_MESSAGES.LOGOUT_SUCCESSFUL
     }
   }
+
+  async refreshToken({
+    user_id,
+    verify,
+    refresh_token,
+    exp
+  }: {
+    user_id: string
+    verify: UserVerifyStatus
+    refresh_token: string
+    exp: number
+  }) {
+    const [new_access_token, new_refresh_token] = await Promise.all([
+      this.signAccessToken({ user_id, verify }),
+      this.signRefreshToken({ user_id, verify, exp }),
+      databaseService.refreshTokens.deleteOne({ token: refresh_token })
+    ])
+    const decoded_refresh_token = await this.decodeRefreshToken(refresh_token)
+    await databaseService.refreshTokens.insertOne(
+      new RefreshToken({
+        user_id: new ObjectId(user_id),
+        token: new_refresh_token,
+        iat: decoded_refresh_token.iat,
+        exp: decoded_refresh_token.exp
+      })
+    )
+    return {
+      access_token: new_access_token,
+      refresh_token: new_refresh_token
+    }
+  }
 }
 
 const userService = new UserService()
