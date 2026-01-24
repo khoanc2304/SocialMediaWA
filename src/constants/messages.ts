@@ -19,4 +19,5 @@ export const USERS_MESSAGES = {
   CONFIRM_PASSWORD_IS_REQUIRED: 'Confirm password is required',
   CONFIRM_PASSWORDS_DOES_NOT_MATCH: 'Confirm password does not match password do not match',
   DATE_OF_BIRTH_MUST_BE_ISO8601: 'Date of birth must be in ISO 8601 format',
+  LOGOUT_SUCCESSFUL: 'Logout successful'
 } as const

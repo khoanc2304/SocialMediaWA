@@ -3,10 +3,12 @@ import type { StringValue } from 'ms'
 import User from '~/models/schemas/users.schema'
 import databaseService from '~/services/database.services'
 import dotenv from 'dotenv'
-import { signToken } from '~/utils/jwt'
+import { signToken, verifyToken } from '~/utils/jwt'
 import { TokenType, UserVerifyStatus } from '~/constants/enums'
 import { RegisterReqBody } from '~/models/requests/users.requets'
 import { hashPassword } from '~/constants/crypto'
+import RefreshToken from '~/models/schemas/refreshToken.schemas'
+import { USERS_MESSAGES } from '~/constants/messages'
 dotenv.config()
 class UserService {
   private signAccessToken({ user_id, verify }: { user_id: string; verify: UserVerifyStatus }) {
@@ -48,6 +50,17 @@ class UserService {
     })
   }
 
+  private signAccessAndRefreshToken({ user_id, verify }: { user_id: string; verify: UserVerifyStatus }) {
+    return Promise.all([this.signAccessToken({ user_id, verify }), this.signRefreshToken({ user_id, verify })])
+  }
+
+  private decodeRefreshToken(refresh_token: string) {
+    return verifyToken({
+      token: refresh_token,
+      secretOrPublicKey: process.env.JWT_SECRET_REFRESH_TOKEN as string
+    })
+  }
+
   async register(payload: RegisterReqBody) {
     const result = await databaseService.users.insertOne(
       new User({
@@ -70,6 +83,33 @@ class UserService {
   async checkEmailExists(email: string) {
     const user = await databaseService.users.findOne({ email })
     return Boolean(user)
+  }
+
+  async login({ user_id, verify }: { user_id: string; verify: UserVerifyStatus }) {
+    const [access_token, refresh_token] = await this.signAccessAndRefreshToken({
+      user_id,
+      verify
+    })
+    const { iat, exp } = await this.decodeRefreshToken(refresh_token)
+    await databaseService.refreshTokens.insertOne(
+      new RefreshToken({
+        user_id: new ObjectId(user_id),
+        token: refresh_token,
+        iat,
+        exp
+      })
+    )
+    return {
+      access_token,
+      refresh_token
+    }
+  }
+
+  async logout(refresh_token: string) {
+    await databaseService.refreshTokens.deleteOne({ token: refresh_token })
+    return {
+      message: USERS_MESSAGES.LOGOUT_SUCCESSFUL
+    }
   }
 }
 
