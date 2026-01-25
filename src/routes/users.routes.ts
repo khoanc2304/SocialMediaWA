@@ -1,13 +1,16 @@
 import { wrapRequestHandler } from '~/utils/handlers'
 import { Router } from 'express'
 import {
+  emailVerifyController,
   loginController,
   logoutController,
   refreshTokenController,
-  registerController
+  registerController,
+  resendVerifyEmailController
 } from '~/controllers/users.controllers'
 import {
   accessTokenValidator,
+  emailVerifyTokenValidator,
   loginValidator,
   refreshTokenValidator,
   registerValidator
@@ -40,11 +43,28 @@ usersRouter.post('/register', registerValidator, wrapRequestHandler(registerCont
 usersRouter.post('/logout', accessTokenValidator, refreshTokenValidator, wrapRequestHandler(logoutController))
 
 /**
- * Description: User, refresh token
+ * Description: User refresh token
  * Path: /refresh
  * Method: POST
  * Body: { refresh_token: string }
  */
 usersRouter.post('/refresh-token', refreshTokenValidator, wrapRequestHandler(refreshTokenController))
+
+/**
+ * Description: User email verification
+ * Path: /verify-email
+ * Method: POST
+ * Body: { email_verify_token: string }
+ */
+usersRouter.post('/verify-email', emailVerifyTokenValidator, wrapRequestHandler(emailVerifyController))
+
+/**
+ * Description: User resend email verification
+ * Path: /resend-verify-email
+ * Method: POST
+ * Header: { Authorization: Bearer <access_token> }
+ * Body: { }
+ */
+usersRouter.post('/resend-verify-email', accessTokenValidator, wrapRequestHandler(resendVerifyEmailController))
 
 export default usersRouter
