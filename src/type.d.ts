@@ -1,4 +1,4 @@
-import { Request} from 'express'
+import { Request } from 'express'
 import { User } from '~/models/schemas/user.schema'
 import { TokenPayload } from './models/requests/user.requests'
 
@@ -8,5 +8,6 @@ declare module 'express' {
     decoded_auth?: TokenPayload
     decored_refresh_token?: TokenPayload
     decoded_email_verify_token?: TokenPayload
+    decoded_forgot_password_token?: TokenPayload
   }
 }
