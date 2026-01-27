@@ -9,6 +9,9 @@ import { RegisterReqBody, UpdateMeReqBody } from '~/models/requests/users.requet
 import { hashPassword } from '~/constants/crypto'
 import RefreshToken from '~/models/schemas/refreshToken.schemas'
 import { USERS_MESSAGES } from '~/constants/messages'
+import axios from 'axios'
+import { ErrorWithStatus } from '~/models/Errors'
+import HTTP_STATUS from '~/constants/httpStatus'
 dotenv.config()
 class UserService {
   private signAccessToken({ user_id, verify }: { user_id: string; verify: UserVerifyStatus }) {
@@ -138,6 +141,88 @@ class UserService {
     await databaseService.refreshTokens.deleteOne({ token: refresh_token })
     return {
       message: USERS_MESSAGES.LOGOUT_SUCCESSFUL
+    }
+  }
+
+  private async getOAuthGoogleToken(code: string) {
+    const body = {
+      code,
+      client_id: process.env.GOOGLE_CLIENT_ID,
+      client_secret: process.env.GOOGLE_CLIENT_SECRET,
+      redirect_uri: process.env.GOOGLE_REDIRECT_URI,
+      grant_type: 'authorization_code'
+    }
+    const { data } = await axios.post('https://oauth2.googleapis.com/token', body, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+    return data as {
+      access_token: string
+      id_token: string
+    }
+  }
+
+  private async getGoogleUserInfo(access_token: string, id_token: string) {
+    const { data } = await axios.get('https://www.googleapis.com/oauth2/v1/userinfo', {
+      params: {
+        alt: 'json',
+        access_token
+      },
+      headers: {
+        Authorization: `Bearer ${id_token}`
+      }
+    })
+    return data as {
+      id: string
+      email: string
+      verified_email: boolean
+      name: string
+      given_name: string
+      family_name: string
+      picture: string
+      locale: string
+    }
+  }
+
+  async oauthGoogle(code: string) {
+    const { id_token, access_token } = await this.getOAuthGoogleToken(code)
+    const userInfo = await this.getGoogleUserInfo(access_token, id_token)
+    if (!userInfo.verified_email) {
+      throw new ErrorWithStatus({ status: HTTP_STATUS.BAD_REQUEST, message: USERS_MESSAGES.GOOGLE_EMAIL_NOT_VERIFIED })
+    }
+    const isEmailExists = await databaseService.users.findOne({ email: userInfo.email })
+    if (isEmailExists) {
+      const [access_token, refresh_token] = await this.signAccessAndRefreshToken({
+        user_id: isEmailExists._id.toString(),
+        verify: isEmailExists.verify
+      })
+      const { iat, exp } = await this.decodeRefreshToken(refresh_token)
+      await databaseService.refreshTokens.insertOne(
+        new RefreshToken({
+          user_id: isEmailExists._id,
+          token: refresh_token,
+          iat,
+          exp
+        })
+      )
+      return {
+        access_token,
+        refresh_token,
+        newUser: 0,
+        verify: isEmailExists.verify
+      }
+    } else {
+      // random password
+      const password = Math.random().toString(36).substring(2, 15)
+      const newUser = await this.register({
+        name: userInfo.name,
+        email: userInfo.email,
+        date_of_birth: new Date().toISOString(),
+        password,
+        confirm_password: password
+      })
+      return { ...newUser, newUser: 1, verify: UserVerifyStatus.UNVERIFIED }
     }
   }
 

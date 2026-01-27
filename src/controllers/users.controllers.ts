@@ -51,6 +51,15 @@ export const logoutController = async (req: Request<ParamsDictionary, any, Logou
   return res.json(result)
 }
 
+export const oauthController = async (req: Request, res: Response) => {
+  const { code } = req.query
+  const result = await usersService.oauthGoogle(code as string)
+  const urlRedirect = `${process.env.CLIENT_REDIRECT_CALLBACK}?access_token=${result.access_token}
+  &refresh_token=${result.refresh_token}&newUser=${result.newUser}&verify=${result.verify}`
+  console.log('Redirecting to:', urlRedirect)
+  return res.redirect(urlRedirect)
+}
+
 export const refreshTokenController = async (
   req: Request<ParamsDictionary, any, RefreshTokenReqBody>,
   res: Response,
