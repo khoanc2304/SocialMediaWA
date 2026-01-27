@@ -3,12 +3,14 @@ import { Router } from 'express'
 import {
   emailVerifyController,
   forgotPasswordController,
+  getMeController,
   loginController,
   logoutController,
   refreshTokenController,
   registerController,
   resendVerifyEmailController,
   resetPasswordController,
+  updateMeController,
   verifyForgotPasswordController
 } from '~/controllers/users.controllers'
 import {
@@ -19,6 +21,8 @@ import {
   refreshTokenValidator,
   registerValidator,
   resetPasswordValidator,
+  updateMeValidator,
+  verifiedUserValidator,
   verifyForgotPasswordValidator
 } from '~/middlewares/users.middlewares'
 
@@ -68,7 +72,7 @@ usersRouter.post('/verify-email', emailVerifyTokenValidator, wrapRequestHandler(
  * Description: User resend email verification
  * Path: /resend-verify-email
  * Method: POST
-  * Header: { Authorization: Bearer <access_token> }
+ * Header: { Authorization: Bearer <access_token> }
  * Body: { }
  */
 usersRouter.post('/resend-verify-email', accessTokenValidator, wrapRequestHandler(resendVerifyEmailController))
@@ -87,7 +91,11 @@ usersRouter.post('/forgot-password', forgotPasswordValidator, wrapRequestHandler
  * Method: POST
  * Body: { forgot_password_token: string }
  */
-usersRouter.post('/verify-forgot-password', verifyForgotPasswordValidator, wrapRequestHandler(verifyForgotPasswordController))
+usersRouter.post(
+  '/verify-forgot-password',
+  verifyForgotPasswordValidator,
+  wrapRequestHandler(verifyForgotPasswordController)
+)
 
 /**
  * Description: User reset password
@@ -96,5 +104,17 @@ usersRouter.post('/verify-forgot-password', verifyForgotPasswordValidator, wrapR
  * Body: { password: string, confirm_password: string, forgot_password_token: string }
  */
 usersRouter.post('/reset-password', resetPasswordValidator, wrapRequestHandler(resetPasswordController))
+
+/**
+ * Description: User me routes
+ * Path: /me
+ * Method: GET, PATCH
+ * Body: { name: string, date_of_birth: string, bio: string, location: string, website: string, username: string, avatar: string, cover_photo: string }
+ * Header: { Authorization: Bearer <access_token> }
+ */
+usersRouter
+  .route('/me')
+  .get(accessTokenValidator, wrapRequestHandler(getMeController))
+  .patch(accessTokenValidator, verifiedUserValidator, updateMeValidator, wrapRequestHandler(updateMeController))
 
 export default usersRouter
