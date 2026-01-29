@@ -50,4 +50,6 @@ export const USERS_MESSAGES = {
   IMAGE_URL_MUST_BE_STRING: 'Image URL must be a string',
   IMAGE_URL_LENGTH_MUST_BE_FROM_1_TO_400_CHARACTERS: 'Image URL length must be from 1 to 400 characters',
   GOOGLE_EMAIL_NOT_VERIFIED: 'Google account email is not verified',
+  UPLOAD_IMAGE_SUCCESSFUL: 'Upload image successful',
+  UPLOAD_VIDEO_SUCCESSFUL: 'Upload video successful',
 } as const
