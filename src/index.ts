@@ -4,6 +4,8 @@ import databaseService from '~/services/database.services'
 import { defaultErrorHandler } from '~/middlewares/error.middlewares'
 import { initFolder } from './utils/file'
 import mediasRouter from './routes/media.route'
+import staticRouter from './routes/static.routes'
+import { UPLOAD_VIDEO_DIR } from './constants/dir'
 
 databaseService.connect()
 const app = express()
@@ -14,6 +16,9 @@ initFolder()
 app.use(express.json())
 app.use('/users', usersRouter)
 app.use('/medias', mediasRouter)
+// app.use('/static/video', express.static(UPLOAD_VIDEO_DIR))
+app.use('/static', staticRouter)
+app.use('/static/video', express.static(UPLOAD_VIDEO_DIR))
 app.use(defaultErrorHandler)
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

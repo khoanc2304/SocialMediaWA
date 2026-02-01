@@ -52,4 +52,6 @@ export const USERS_MESSAGES = {
   GOOGLE_EMAIL_NOT_VERIFIED: 'Google account email is not verified',
   UPLOAD_IMAGE_SUCCESSFUL: 'Upload image successful',
   UPLOAD_VIDEO_SUCCESSFUL: 'Upload video successful',
+  UPLOAD_VIDEO_HLS_SUCCESSFUL: 'Upload video HLS successful',
+  GET_VIDEO_STATUS_SUCCESSFUL: 'Get video status successful'
 } as const

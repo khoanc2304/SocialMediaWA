@@ -44,11 +44,14 @@
     "tsconfig-paths": "^4.2.0"
   },
   "dependencies": {
+    "@vidstack/react": "^0.6.15",
     "axios": "^1.13.3",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "express-validator": "^7.3.1",
     "formidable": "^3.5.4",
+    "i": "^0.3.7",
     "jsonwebtoken": "^9.0.3",
     "lodash": "^4.17.23",
     "mime": "^4.1.0",
@@ -56,6 +59,9 @@
     "mongo": "^0.1.0",
     "mongodb": "^7.0.0",
     "nanoid": "^5.1.6",
-    "sharp": "^0.34.5"
+    "npm": "^11.8.0",
+    "sharp": "^0.34.5",
+    "vidstack": "^0.6.15",
+    "zx": "^8.8.5"
   }
 }

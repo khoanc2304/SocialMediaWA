@@ -8,6 +8,7 @@ import { config } from 'dotenv'
 import { isProduction } from '~/constants/config'
 import { MediaType } from '~/constants/enums'
 import { Media } from '~/models/Others'
+import databaseService from './database.services'
 config()
 
 class MediaService {
@@ -45,6 +46,27 @@ class MediaService {
       }
     })
     return result
+  }
+
+  async uploadVideoHLS(req: Request) {
+    const files = await handleUploadVideo(req)
+    const result: Media[] = await Promise.all(
+      files.map(async (file) => {
+        const newName = getNameFromFullNameFile(file.newFilename)
+        return {
+          url: isProduction
+            ? `${process.env.HOST}/static/video-hls/${newName}.m3u8`
+            : `http://localhost:${process.env.PORT}/static/video-hls/${newName}.m3u8`,
+          type: MediaType.HLS
+        }
+      })
+    )
+    return result
+  }
+
+  async getVideoStatus(id: string) {
+    const data = await databaseService.videoStatus.findOne({ name: id })
+    return data
   }
 }
 
