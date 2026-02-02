@@ -1,9 +1,9 @@
 import express from 'express'
 import usersRouter from '~/routes/users.routes'
-import databaseService from '~/services/database.services'
-import { defaultErrorHandler } from '~/middlewares/error.middlewares'
+import databaseService from '~/services/database.service'
+import { defaultErrorHandler } from '~/middlewares/error.middleware'
 import { initFolder } from './utils/file'
-import mediasRouter from './routes/media.route'
+import mediasRouter from './routes/medias.route'
 import staticRouter from './routes/static.routes'
 import { UPLOAD_VIDEO_DIR } from './constants/dir'
 

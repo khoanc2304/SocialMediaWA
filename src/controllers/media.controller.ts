@@ -3,7 +3,7 @@ import path from 'path'
 import { UPLOAD_IMAGE_DIR, UPLOAD_VIDEO_DIR } from '~/constants/dir'
 import HTTP_STATUS from '~/constants/httpStatus'
 import { USERS_MESSAGES } from '~/constants/messages'
-import mediaService from '~/services/media.service'
+import mediaService from '~/services/medias.service'
 import fs from 'fs'
 import mime from 'mime'
 // console.log('Media controller loaded from', path.resolve('uploads'))

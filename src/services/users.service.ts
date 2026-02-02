@@ -1,11 +1,11 @@
 import { ObjectId } from 'mongodb'
 import type { StringValue } from 'ms'
 import User from '~/models/schemas/users.schema'
-import databaseService from '~/services/database.services'
+import databaseService from '~/services/database.service'
 import dotenv from 'dotenv'
 import { signToken, verifyToken } from '~/utils/jwt'
 import { TokenType, UserVerifyStatus } from '~/constants/enums'
-import { RegisterReqBody, UpdateMeReqBody } from '~/models/requests/users.requets'
+import { RegisterReqBody, UpdateMeReqBody } from '~/models/requests/users.requet'
 import { hashPassword } from '~/constants/crypto'
 import RefreshToken from '~/models/schemas/refreshToken.schema'
 import { USERS_MESSAGES } from '~/constants/messages'
@@ -268,7 +268,7 @@ class UserService {
       databaseService.users.updateOne({ _id: new ObjectId(user_id) }, [
         {
           $set: {
-            email_verify_status: '',
+            // email_verify_status: '',
             verify: UserVerifyStatus.VERIFIED,
             updated_at: '$$NOW'
           }

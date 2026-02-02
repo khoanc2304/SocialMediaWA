@@ -13,7 +13,7 @@ import {
   resetPasswordController,
   updateMeController,
   verifyForgotPasswordController
-} from '~/controllers/users.controllers'
+} from '~/controllers/users.controller'
 import {
   accessTokenValidator,
   emailVerifyTokenValidator,
@@ -25,7 +25,7 @@ import {
   updateMeValidator,
   verifiedUserValidator,
   verifyForgotPasswordValidator
-} from '~/middlewares/users.middlewares'
+} from '~/middlewares/users.middleware'
 
 const usersRouter = Router()
 

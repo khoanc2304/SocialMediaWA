@@ -2,7 +2,7 @@ import { MongoClient, Db, Collection } from 'mongodb'
 import dotenv from 'dotenv'
 import User from '~/models/schemas/users.schema'
 import RefreshToken from '~/models/schemas/refreshToken.schema'
-import VideoStatus from '~/models/schemas/videos.schemas'
+import VideoStatus from '~/models/schemas/videos.schema'
 dotenv.config()
 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@twitter.epbfkay.mongodb.net/?appName=Twitter`

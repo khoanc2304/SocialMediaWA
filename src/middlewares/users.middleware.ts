@@ -1,10 +1,10 @@
-import usersService from '~/services/users.services'
+import usersService from '~/services/users.service'
 import { NextFunction, Request, Response } from 'express'
 import { checkSchema, ParamSchema } from 'express-validator'
 import { USERS_MESSAGES } from '~/constants/messages'
 import { validate } from '~/utils/validation'
 import { hashPassword } from '~/constants/crypto'
-import databaseService from '~/services/database.services'
+import databaseService from '~/services/database.service'
 import HTTP_STATUS from '~/constants/httpStatus'
 import { ErrorWithStatus } from '~/models/Errors'
 import { verifyToken } from '~/utils/jwt'
@@ -12,7 +12,7 @@ import { JsonWebTokenError } from 'jsonwebtoken'
 import { capitalize } from 'lodash'
 import { ObjectId } from 'mongodb'
 import { UserVerifyStatus } from '~/constants/enums'
-import { TokenPayload } from '~/models/requests/users.requets'
+import { TokenPayload } from '~/models/requests/users.requet'
 
 const nameSchema: ParamSchema = {
   notEmpty: {
