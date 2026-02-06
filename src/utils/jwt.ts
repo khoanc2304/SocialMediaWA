@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import dotenv from 'dotenv'
-import { TokenPayload } from '~/models/requests/users.requet'
+import { TokenPayload } from '~/models/requests/users.request'
 dotenv.config()
 
 export const signToken = ({

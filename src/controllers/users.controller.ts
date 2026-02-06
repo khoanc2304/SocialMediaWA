@@ -12,7 +12,7 @@ import {
   UpdateMeReqBody,
   VerifyEmailReqBody,
   VerifyForgotPasswordReqBody
-} from '~/models/requests/users.requet'
+} from '~/models/requests/users.request'
 import User from '~/models/schemas/users.schema'
 import usersService from '~/services/users.service'
 import { ParamsDictionary } from 'express-serve-static-core'

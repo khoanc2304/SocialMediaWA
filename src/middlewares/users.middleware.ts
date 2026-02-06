@@ -12,7 +12,7 @@ import { JsonWebTokenError } from 'jsonwebtoken'
 import { capitalize } from 'lodash'
 import { ObjectId } from 'mongodb'
 import { UserVerifyStatus } from '~/constants/enums'
-import { TokenPayload } from '~/models/requests/users.requet'
+import { TokenPayload } from '~/models/requests/users.request'
 
 const nameSchema: ParamSchema = {
   notEmpty: {

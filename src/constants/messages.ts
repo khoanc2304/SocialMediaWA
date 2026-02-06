@@ -55,3 +55,15 @@ export const USERS_MESSAGES = {
   UPLOAD_VIDEO_HLS_SUCCESSFUL: 'Upload video HLS successful',
   GET_VIDEO_STATUS_SUCCESSFUL: 'Get video status successful'
 } as const
+
+export const TWEETS_MESSAGES = {
+  INVALID_TWEET_TYPE: 'Invalid tweet type',
+  INVALID_TWEET_AUDIENCE: 'Invalid tweet audience',
+  PARENT_ID_MUST_BE_VALID_TWEET_ID: 'Parent ID must be a valid tweet ID',
+  PARENT_ID_MUST_BE_NULL: 'Parent ID must be null for tweet type',
+  CONTENT_MUST_BE_A_NON_EMPTY_STRING: 'Content must be a non-empty string for this tweet type',
+  CONTENT_MUST_BE_EMPTY_STRING: 'Content must be an empty string',
+  HASHTAGS_MUST_BE_ARRAY_OF_STRINGS: 'Hashtags must be an array of strings',
+  MENTIONS_MUST_BE_ARRAY_OF_STRINGS: 'Mentions must be an array of strings',
+  MEDIAS_MUST_BE_ARRAY_OF_MEDIA_OBJECTS: 'Medias must be an array of media objects'
+} as const
