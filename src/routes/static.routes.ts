@@ -1,6 +1,6 @@
 import { wrapRequestHandler } from '~/utils/handlers'
 import { Router } from 'express'
-import { serveImageController, serveVideoStreamingController, serveM3u8Controller,  serveSegmentController } from '~/controllers/media.controller'
+import { serveImageController, serveVideoStreamingController, serveM3u8Controller,  serveSegmentController } from '~/controllers/medias.controller'
 
 const staticRouter = Router()
 

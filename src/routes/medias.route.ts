@@ -5,7 +5,7 @@ import {
   uploadVideoController,
   uploadVideoHLSController,
   videoStatusController
-} from '~/controllers/media.controller'
+} from '~/controllers/medias.controller'
 import { accessTokenValidator, verifiedUserValidator } from '~/middlewares/users.middleware'
 
 const mediasRouter = Router()

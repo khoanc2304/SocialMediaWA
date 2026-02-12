@@ -8,6 +8,8 @@ import Tweet from '~/models/schemas/tweets.schema'
 import { numberEnumToArray } from '~/utils/common'
 import { validate } from '~/utils/validation'
 import { types } from 'node:util'
+import { ErrorWithStatus } from '~/models/Errors'
+import HTTP_STATUS from '~/constants/httpStatus'
 
 const tweetTypes = numberEnumToArray(TweetType)
 const tweetAudiences = numberEnumToArray(TweetAudience)

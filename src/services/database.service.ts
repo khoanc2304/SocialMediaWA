@@ -5,6 +5,8 @@ import RefreshToken from '~/models/schemas/refreshToken.schema'
 import VideoStatus from '~/models/schemas/videos.schema'
 import Hashtag from '~/models/schemas/hashtags.schema'
 import Tweet from '~/models/schemas/tweets.schema'
+import Bookmark from '~/models/schemas/bookmarks.schema'
+import Like from '~/models/schemas/likes.schema'
 dotenv.config()
 
 const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@twitter.epbfkay.mongodb.net/?appName=Twitter`
@@ -69,6 +71,14 @@ class DatebaseService {
 
   get hashtags(): Collection<Hashtag> {
     return this.db.collection(process.env.DB_HASHTAGS_COLLECTION as string)
+  }
+
+  get bookmarks(): Collection<Bookmark> {
+    return this.db.collection(process.env.DB_BOOKMARKS_COLLECTION as string)
+  }
+
+  get likes(): Collection<Like> {
+    return this.db.collection(process.env.DB_LIKES_COLLECTION as string)
   }
 }
 

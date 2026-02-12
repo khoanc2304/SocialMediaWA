@@ -67,3 +67,15 @@ export const TWEETS_MESSAGES = {
   MENTIONS_MUST_BE_ARRAY_OF_STRINGS: 'Mentions must be an array of strings',
   MEDIAS_MUST_BE_ARRAY_OF_MEDIA_OBJECTS: 'Medias must be an array of media objects'
 } as const
+
+export const BOOKMARK_MESSAGES = {
+  BOOKMARK_CREATED_SUCCESSFULLY: 'Bookmark created successfully',
+  BOOKMARK_DELETED_SUCCESSFULLY: 'Bookmark deleted successfully',
+  BOOKMARK_NOT_FOUND: 'Bookmark not found'
+} as const
+
+export const LIKE_MESSAGES = {
+  LIKE_CREATED_SUCCESSFULLY: 'Like created successfully',
+  LIKE_DELETED_SUCCESSFULLY: 'Like deleted successfully',
+  LIKE_NOT_FOUND: 'Like not found'
+} as const
