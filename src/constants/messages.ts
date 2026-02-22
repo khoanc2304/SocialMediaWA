@@ -53,7 +53,8 @@ export const USERS_MESSAGES = {
   UPLOAD_IMAGE_SUCCESSFUL: 'Upload image successful',
   UPLOAD_VIDEO_SUCCESSFUL: 'Upload video successful',
   UPLOAD_VIDEO_HLS_SUCCESSFUL: 'Upload video HLS successful',
-  GET_VIDEO_STATUS_SUCCESSFUL: 'Get video status successful'
+  GET_VIDEO_STATUS_SUCCESSFUL: 'Get video status successful',
+  ACCESS_TOKEN_IS_REQUIRED: 'Access token is required'
 } as const
 
 export const TWEETS_MESSAGES = {
@@ -65,7 +66,16 @@ export const TWEETS_MESSAGES = {
   CONTENT_MUST_BE_EMPTY_STRING: 'Content must be an empty string',
   HASHTAGS_MUST_BE_ARRAY_OF_STRINGS: 'Hashtags must be an array of strings',
   MENTIONS_MUST_BE_ARRAY_OF_STRINGS: 'Mentions must be an array of strings',
-  MEDIAS_MUST_BE_ARRAY_OF_MEDIA_OBJECTS: 'Medias must be an array of media objects'
+  TWEET_CREATED_SUCCESSFULLY: 'Tweet created successfully',
+  MEDIAS_MUST_BE_ARRAY_OF_MEDIA_OBJECTS: 'Medias must be an array of media objects',
+  MAX_LIMIT_IS_100: 'Max limit is 100',
+  MIN_LIMIT_IS_1: 'Min limit is 1',
+  MIN_PAGE_IS_1: 'Min page is 1',
+  TWEET_IS_NOT_PUBLIC: 'Tweet is not public',
+  TWEET_ID_MUST_BE_VALID_OBJECT_ID: 'Tweet ID must be a valid ObjectId',
+  TWEET_NOT_FOUND: 'Tweet not found',
+  TWEET_CHILDREN_FETCHED_SUCCESSFULLY: 'Tweet children fetched successfully',
+  TWEET_NEW_FEEDS_SUCCESSFULLY: 'New feeds fetched successfully'
 } as const
 
 export const BOOKMARK_MESSAGES = {

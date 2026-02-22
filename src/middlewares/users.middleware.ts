@@ -593,3 +593,12 @@ export const updateMeValidator = validate(
     ['body']
   )
 )
+
+export const requireAuthValidator = (validator: (req: Request, res: Response, next: NextFunction) => void) => {
+  return (req: Request, res: Response, next: NextFunction) => {
+    if (req.headers.authorization) {
+      return validator(req, res, next)
+    }
+    next()
+  }
+}

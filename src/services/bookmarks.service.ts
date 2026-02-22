@@ -1,5 +1,5 @@
+import HTTP_STATUS from '~/constants/httpStatus'
 import { ObjectId } from 'mongodb'
-import httpStatus from '~/constants/httpStatus'
 import { BOOKMARK_MESSAGES } from '~/constants/messages'
 import { ErrorWithStatus } from '~/models/Errors'
 import databaseService from './database.service'
@@ -39,7 +39,7 @@ export const BookmarkService = {
     if (!result) {
       throw new ErrorWithStatus({
         message: BOOKMARK_MESSAGES.BOOKMARK_NOT_FOUND,
-        status: httpStatus.NOT_FOUND
+        status: HTTP_STATUS.NOT_FOUND
       })
     }
     return {

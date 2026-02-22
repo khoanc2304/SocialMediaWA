@@ -1,4 +1,4 @@
-import httpStatus from '~/constants/httpStatus'
+import HTTP_STATUS from '~/constants/httpStatus'
 import { LIKE_MESSAGES } from '~/constants/messages'
 import { ErrorWithStatus } from '~/models/Errors'
 import databaseService from './database.service'
@@ -16,7 +16,7 @@ export const LikeService = {
     if (!result) {
       throw new ErrorWithStatus({
         message: LIKE_MESSAGES.LIKE_NOT_FOUND,
-        status: httpStatus.NOT_FOUND
+        status: HTTP_STATUS.NOT_FOUND
       })
     }
     return {
@@ -36,7 +36,7 @@ export const LikeService = {
     if (!result) {
       throw new ErrorWithStatus({
         message: LIKE_MESSAGES.LIKE_NOT_FOUND,
-        status: httpStatus.NOT_FOUND
+        status: HTTP_STATUS.NOT_FOUND
       })
     }
     return {
